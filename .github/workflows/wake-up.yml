@@ -1,6 +1,8 @@
 name: Run Discord Bot
 
-on: [push, pull_request]
+on:
+    schedule:
+      - cron: "15 * * * *"
 
 jobs:
   run-bot:
@@ -24,4 +26,4 @@ jobs:
       env:
         DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
       run: |
-        timeout 30 python main.py
+        timeout 90 python main.py

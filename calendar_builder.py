@@ -16,7 +16,7 @@ def generate_month(month_index, today_date, data_multi_dict):
     cell_width, cell_height = (81, 51)
     tcell_width, tcell_height = (81, 71)  # Dimensions of one cell
 
-    faerun_months = ["Hammer", "Alturiak", "Ches", "Tarsakh", "Mirtul", "Kythorn", "Flamerule", "Eleasias", "Eleint", "Marpenoth", "Uktar", "Nightal"]
+    faerun_months = ["Hammer", "Alturiak", "Ches", "Tarsakh", "Mirtul", "Kythorn", "Flamerule", "Eleasis", "Eleint", "Marpenoth", "Uktar", "Nightal"]
     polish_months = ['Styczen', 'Luty', 'Marzec', 'Kwiecien', 'Maj', 'Czerwiec','Lipiec', 'Sierpien', 'Wrzesien', 'Pazdziernik', 'Listopad', 'Grudzien']
 
     # Function to calculate cell position based on date

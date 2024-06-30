@@ -5,11 +5,13 @@ import json
 from datetime import datetime, timedelta
 from event_card import create_image_with_text
 from calendar_builder import generate_month
+from faerun_today import get_todays_messages
 
 KIEDY_KURDE_SESJA_CHANNEL_ID = 1256702886717427856
 TEST_ASDASDASD_CHANNEL_ID = 1256525986464268358
 CALENDAR_CHANNEL_ID=1256702886717427856
 CALENDAR_DATA_CHANNEL_ID=1256713139592892509
+FAERUN_TODAY_CHANNEL_ID=1257059747509567488
 
 start_time = time.time()
 
@@ -23,12 +25,26 @@ class MyClient(discord.Client):
 
         channel = self.get_channel(CALENDAR_DATA_CHANNEL_ID)
         send_channel = self.get_channel(CALENDAR_CHANNEL_ID)
+        faerun_today_channel = self.get_channel(FAERUN_TODAY_CHANNEL_ID)
+        
+        # current hour
+        current_time = datetime.now()
+
         await load_events_from_channel(channel, send_channel)
+        if 6 <= current_time.hour < 7:
+            await update_faerun_today(faerun_today_channel)
 
     async def on_message(self, message):
         print(f'Message from {message.author}: {message.content}')
         if message.content == 'ping':
             await message.channel.send('pong')
+
+async def send_on_channel(message, channel):
+    await channel.send(message)
+
+async def update_faerun_today(faerun_today_channel):
+    message = get_todays_messages()
+    await send_on_channel(message, faerun_today_channel)
 
 async def load_events_from_channel(channel, send_channel):
         messages = [message async for message in channel.history(limit=123)]

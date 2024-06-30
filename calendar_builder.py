@@ -46,7 +46,7 @@ def generate_month(month_index, today_date, data_multi_dict):
     # Extract month from datetime object
     today_month = date_object.month
     if today_month-1==month_index:
-        image_path = "blue-star-icon-png.webp"
+        image_path = "star_better.jpg"
         if today in data_multi_dict.keys():
             image_path = "today_2.png"
         today_img = Image.open(image_path)

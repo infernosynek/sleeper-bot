@@ -55,12 +55,14 @@ def generate_month(month_index, today_date, data_multi_dict):
         calendar.paste(resized_img, (cell_position[0], cell_position[1]-20))
 
     title_text = faerun_months[month_index]
-    title_text_width, title_text_height = draw.textsize(title_text, font=title_font)
+    title_text_width = draw.textlength(title_text, font=title_font)
+    title_text_height = title_font_size
     title_position = (title_center_x - title_text_width // 2, title_center_y - title_text_height // 2)
     draw.text(title_position, title_text, font=title_font, fill='black')
 
     sub_title_text = polish_months[month_index]
-    sub_title_text_width, sub_title_text_height = draw.textsize(sub_title_text, font=sub_title_font)
+    sub_title_text_width = draw.textlength(sub_title_text, font=sub_title_font)
+    sub_title_text_height = sub_title_font_size
     sub_title_position = (sub_title_center_x - sub_title_text_width // 2, sub_title_center_y - sub_title_text_height // 2)
     draw.text(sub_title_position, sub_title_text, font=sub_title_font, fill='black')
 
@@ -75,7 +77,8 @@ def generate_month(month_index, today_date, data_multi_dict):
         words = event_title.split(' ')
         y = cell_position[1]
         for word in words:
-            word_width, word_height = draw.textsize(word, font=callendar_font)
+            word_width = draw.textlength(word, font=callendar_font)
+            word_height = callendar_font_size
             draw.text((cell_position[0]+( cell_width- word_width) // 2, y), word, font=callendar_font, fill='black')
             y += word_height  # Move to the next line
 

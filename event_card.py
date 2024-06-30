@@ -19,7 +19,7 @@ def create_image_with_text(title_string, date_string, description_string, output
     
     # Define text positions
     # Center the title
-    title_width, title_height = draw.textsize(title_string, font=title_font)
+    title_width = draw.textlength(title_string, font=title_font)
     title_position = ((background.width - title_width) // 2, 50)
 
     date_position = (50, 175)

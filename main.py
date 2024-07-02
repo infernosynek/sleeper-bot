@@ -13,6 +13,8 @@ CALENDAR_CHANNEL_ID=1256702886717427856
 CALENDAR_DATA_CHANNEL_ID=1256713139592892509
 FAERUN_TODAY_CHANNEL_ID=1257059747509567488
 
+DRY_RUN = False
+
 start_time = time.time()
 
 class MyClient(discord.Client):
@@ -26,9 +28,13 @@ class MyClient(discord.Client):
         channel = self.get_channel(CALENDAR_DATA_CHANNEL_ID)
         send_channel = self.get_channel(CALENDAR_CHANNEL_ID)
         faerun_today_channel = self.get_channel(FAERUN_TODAY_CHANNEL_ID)
-        
+        test_channel = self.get_channel(TEST_ASDASDASD_CHANNEL_ID)
+
         # current hour
         current_time = datetime.now()
+
+        if DRY_RUN:
+            return
 
         await load_events_from_channel(channel, send_channel)
         if 6 <= current_time.hour < 7:
@@ -43,8 +49,10 @@ async def send_on_channel(message, channel):
     await channel.send(message)
 
 async def update_faerun_today(faerun_today_channel):
-    message = get_todays_messages()
+    message, image_path = get_todays_messages()
     await send_on_channel(message, faerun_today_channel)
+    if image_path != None:
+        await faerun_today_channel.send(file=discord.File(image_path))
 
 async def load_events_from_channel(channel, send_channel):
         messages = [message async for message in channel.history(limit=123)]
